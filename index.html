@@ -46,15 +46,14 @@
       justify-content: center;
       text-align: center;
     }
-    .logo {
-      width: 240px;
-      max-width: 70%;
-      height: auto;
-      margin-bottom: 1.5rem;
-    }
-    /* Logo artwork is white (from the original dark-themed site); invert it on light backgrounds */
-    @media (prefers-color-scheme: light) {
-      .logo { filter: invert(1); }
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.75rem;
+      border: 3px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     }
     h1 {
       font-size: clamp(2.2rem, 6vw, 3.4rem);
@@ -108,6 +107,69 @@
       transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     }
     .links a:hover { border-color: var(--accent); color: var(--accent); }
+    .links + .brand-logo { margin-top: 1.75rem; }
+    .brand-logo {
+      display: block;
+      width: 200px;
+      max-width: 60%;
+      height: auto;
+      margin: 0 auto 1.25rem;
+    }
+    /* Logo artwork is white (from the original dark-themed site); invert it on light backgrounds */
+    @media (prefers-color-scheme: light) {
+      .brand-logo { filter: invert(1); }
+    }
+
+    /* About */
+    .about { padding: 3rem 0 1rem; }
+    .about .lead {
+      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+    .facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .fact {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+    }
+    .fact svg { width: 15px; height: 15px; }
+    .work-list {
+      max-width: 640px;
+      margin: 0 auto;
+      list-style: none;
+    }
+    .work-list h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+    .work-list li {
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .work-list li:last-child { border-bottom: none; }
+    .work-list .w-name { font-weight: 600; }
+    .work-list .w-desc { color: var(--muted); font-size: 0.92rem; }
 
     /* Projects */
     .projects { padding-bottom: 4rem; }
@@ -177,7 +239,7 @@
   <!-- HERO -->
   <header class="hero">
     <div class="wrap">
-      <img class="logo" src="assets/logo.png" alt="Alessandro Nicolodi logo" width="347" height="189" />
+      <img class="avatar" src="assets/profile.jpg" alt="Alessandro Nicolodi" width="800" height="800" />
       <h1>Alessandro Nicolodi</h1>
       <p class="tagline">software developer by work and photographer by passion</p>
 
@@ -194,12 +256,68 @@
       </nav>
 
       <nav class="links" aria-label="Main navigation">
+        <a href="#about">About</a>
         <a href="#projects">Projects</a>
+      </nav>
+
+      <img class="brand-logo" src="assets/logo.png" alt="Alessandro Nicolodi logo" width="347" height="189" />
+
+      <nav class="links" aria-label="Photography">
         <a href="https://alessandronicolodi.myportfolio.com/work" target="_blank" rel="noopener noreferrer">Gallery</a>
         <a href="https://nico78photo.blogspot.com/" target="_blank" rel="noopener noreferrer">Photography blog</a>
       </nav>
     </div>
   </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <h2 class="section-title">About</h2>
+      <p class="lead">
+        Software developer based in Trento, Italy. Since 2001 I've been designing and
+        building IT systems with Microsoft technologies at Trentino Digitale — from a
+        custom database framework to large management systems for the public sector.
+        Outside of work, I'm a passionate photographer.
+      </p>
+
+      <div class="facts">
+        <span class="fact">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          Trento, Italia
+        </span>
+        <span class="fact">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 6h-4V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-6 0h-4V4h4v2z"/></svg>
+          Trentino Digitale
+        </span>
+        <span class="fact">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+          Università di Trento
+        </span>
+      </div>
+
+      <ul class="work-list">
+        <h3>Education</h3>
+        <li>
+          <span class="w-name">Università di Trento</span>
+          <span class="w-desc">— Laurea Specialistica, Net Economy · voto 105</span>
+        </li>
+        <li>
+          <span class="w-name">Università di Trento</span>
+          <span class="w-desc">— Diploma universitario, Computer Engineering · nov 1997 – mar 2000 · voto 100</span>
+        </li>
+      </ul>
+
+      <ul class="work-list" style="margin-top:2rem;">
+        <h3>Selected work at Trentino Digitale</h3>
+        <li><span class="w-name">ITWallet — Authentic Sources</span></li>
+        <li><span class="w-name">Signalhub</span></li>
+        <li><span class="w-name">ISI</span><span class="w-desc">— educational information system</span></li>
+        <li><span class="w-name">VVF</span><span class="w-desc">— fleet management system</span></li>
+        <li><span class="w-name">SGA</span><span class="w-desc">— school administration system</span></li>
+        <li><span class="w-name">Tndigit ORM</span><span class="w-desc">— database framework</span></li>
+      </ul>
+    </div>
+  </section>
 
   <!-- PROJECTS -->
   <section id="projects" class="projects">
