@@ -1,8 +1,262 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>My personal page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alessandro Nicolodi</title>
+  <meta name="description" content="Alessandro Nicolodi — software developer by work and photographer by passion." />
+  <style>
+    :root {
+      --bg: #0f1115;
+      --fg: #f5f5f7;
+      --muted: #a1a1aa;
+      --accent: #6ea8fe;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-hover: rgba(255, 255, 255, 0.10);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fafafa;
+        --fg: #18181b;
+        --muted: #52525b;
+        --accent: #2563eb;
+        --card: rgba(0, 0, 0, 0.04);
+        --card-hover: rgba(0, 0, 0, 0.07);
+        --border: rgba(0, 0, 0, 0.10);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .logo {
+      width: 240px;
+      max-width: 70%;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+    /* Logo artwork is white (from the original dark-themed site); invert it on light backgrounds */
+    @media (prefers-color-scheme: light) {
+      .logo { filter: invert(1); }
+    }
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .tagline {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .socials {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      transition: transform 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-3px);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .socials svg { width: 22px; height: 22px; }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .links a {
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 600;
+      padding: 0.7rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card);
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Projects */
+    .projects { padding-bottom: 4rem; }
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+    .section-sub {
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .project {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--fg);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.3rem;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+    .project:hover {
+      transform: translateY(-4px);
+      background: var(--card-hover);
+      border-color: var(--accent);
+    }
+    .project-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-head svg { width: 18px; height: 18px; color: var(--muted); flex-shrink: 0; }
+    .project-name { font-weight: 700; font-size: 1.05rem; word-break: break-word; }
+    .project-desc { color: var(--muted); font-size: 0.92rem; flex-grow: 1; }
+    .project-meta { margin-top: 1rem; display: flex; align-items: center; gap: 0.4rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .lang { font-size: 0.82rem; color: var(--muted); }
+    .fork-tag {
+      font-size: 0.72rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
+      margin-left: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0 3rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
-Under contruction
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <img class="logo" src="assets/logo.png" alt="Alessandro Nicolodi logo" width="347" height="189" />
+      <h1>Alessandro Nicolodi</h1>
+      <p class="tagline">software developer by work and photographer by passion</p>
+
+      <nav class="socials" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/anicolod/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/alessandro.nicolodi" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/anicolod78/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.44c-3.14 0-3.51.01-4.75.07-1.15.05-1.77.24-2.19.4-.55.21-.94.47-1.35.88-.41.41-.67.8-.88 1.35-.16.42-.35 1.04-.4 2.19-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.05 1.15.24 1.77.4 2.19.21.55.47.94.88 1.35.41.41.8.67 1.35.88.42.16 1.04.35 2.19.4 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c1.15-.05 1.77-.24 2.19-.4.55-.21.94-.47 1.35-.88.41-.41.67-.8.88-1.35.16-.42.35-1.04.4-2.19.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.05-1.15-.24-1.77-.4-2.19a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.42-.16-1.04-.35-2.19-.4-1.24-.06-1.61-.07-4.75-.07zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>
+        </a>
+      </nav>
+
+      <nav class="links" aria-label="Main navigation">
+        <a href="#projects">Projects</a>
+        <a href="https://alessandronicolodi.myportfolio.com/work" target="_blank" rel="noopener noreferrer">Gallery</a>
+        <a href="https://nico78photo.blogspot.com/" target="_blank" rel="noopener noreferrer">Photography blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="projects">
+    <div class="wrap">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">Open-source projects published on my <a href="https://github.com/anicolod78" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">GitHub</a></p>
+
+      <div class="grid">
+        <a class="project" href="https://github.com/anicolod78/mylist" target="_blank" rel="noopener noreferrer">
+          <div class="project-head">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+            <span class="project-name">mylist</span>
+          </div>
+          <p class="project-desc">Lista della spesa condivisa (Flutter): aggiungi voci anche da messaggi SMS/WhatsApp, con flusso spunta → conferma → elimina e persistenza locale. Web e Android.</p>
+          <div class="project-meta"><span class="dot"></span><span class="lang">Flutter · Dart</span></div>
+        </a>
+
+        <a class="project" href="https://github.com/anicolod78/mylibrary" target="_blank" rel="noopener noreferrer">
+          <div class="project-head">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+            <span class="project-name">mylibrary</span>
+          </div>
+          <p class="project-desc">Catalogo libri personale (Flutter): ricerca per ISBN/titolo su Google Books, SBN e Open Library, scansione barcode, scaffali, stato di lettura, statistiche ed export CSV/JSON.</p>
+          <div class="project-meta"><span class="dot"></span><span class="lang">Flutter · Dart</span></div>
+        </a>
+
+        <a class="project" href="https://github.com/anicolod78/takemeasure" target="_blank" rel="noopener noreferrer">
+          <div class="project-head">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+            <span class="project-name">takemeasure</span>
+          </div>
+          <p class="project-desc">App Android (Flutter) per il rilievo delle misure di una stanza: disegna la pianta poligonale con angoli a 90°/45°, registra lati e altezze, calcola perimetro e area, esporta in PNG/JSON.</p>
+          <div class="project-meta"><span class="dot"></span><span class="lang">Flutter · Dart</span></div>
+        </a>
+
+        <a class="project" href="https://github.com/anicolod78/ricettemediche" target="_blank" rel="noopener noreferrer">
+          <div class="project-head">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+            <span class="project-name">ricettemediche</span>
+          </div>
+          <p class="project-desc">App Flutter per gestire i medicinali e richiedere le ricette al medico via email, con promemoria di assunzione (notifiche locali) e dati sensibili salvati in storage cifrato.</p>
+          <div class="project-meta"><span class="dot"></span><span class="lang">Flutter · Dart</span></div>
+        </a>
+
+        <a class="project" href="https://github.com/anicolod78/SwDoc" target="_blank" rel="noopener noreferrer">
+          <div class="project-head">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+            <span class="project-name">SwDoc</span>
+            <span class="fork-tag">fork</span>
+          </div>
+          <p class="project-desc">Swagger PDF generator.</p>
+          <div class="project-meta"><span class="dot"></span><span class="lang">C#</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>&copy; Alessandro Nicolodi</footer>
 </body>
 </html>
