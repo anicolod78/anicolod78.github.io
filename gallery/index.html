@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Alessandro Nicolodi</title>
+  <meta name="description" content="Photo gallery by Alessandro Nicolodi." />
+  <style>
+    :root {
+      --bg: #0f1115;
+      --fg: #f5f5f7;
+      --muted: #a1a1aa;
+      --accent: #6ea8fe;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-hover: rgba(255, 255, 255, 0.10);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fafafa;
+        --fg: #18181b;
+        --muted: #52525b;
+        --accent: #2563eb;
+        --card: rgba(0, 0, 0, 0.04);
+        --card-hover: rgba(0, 0, 0, 0.07);
+        --border: rgba(0, 0, 0, 0.10);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+    header.top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    header.top h1 { font-size: 1.4rem; letter-spacing: -0.01em; }
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--fg);
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .back:hover { border-color: var(--accent); color: var(--accent); }
+
+    .crumb { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
+
+    /* Album grid */
+    .albums {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .album {
+      display: block;
+      text-decoration: none;
+      color: var(--fg);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .album:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .album .cover {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      background: var(--card-hover);
+    }
+    .album .meta { padding: 0.8rem 1rem; }
+    .album .meta .name { font-weight: 700; }
+    .album .meta .count { color: var(--muted); font-size: 0.85rem; }
+
+    /* Photo grid */
+    .photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.5rem;
+    }
+    .photos img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      background: var(--card);
+      transition: opacity 0.15s ease;
+    }
+    .photos img:hover { opacity: 0.85; }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 3rem 1rem;
+    }
+    .empty code {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.9em;
+    }
+    .empty pre {
+      display: inline-block;
+      text-align: left;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      color: var(--fg);
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 94vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .lightbox .lb-btn {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+    }
+    .lightbox .lb-btn:hover { background: rgba(255, 255, 255, 0.25); }
+    .lb-close { top: 1rem; right: 1rem; }
+    .lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }
+    @media (max-width: 640px) {
+      .lb-prev { left: 0.5rem; }
+      .lb-next { right: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1>Gallery</h1>
+      <a class="back" href="/">← Home</a>
+    </header>
+
+    <div id="crumb" class="crumb"></div>
+    <div id="content"></div>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close">×</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <img id="lbImg" src="" alt="" />
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+  </div>
+
+  <script>
+    const content = document.getElementById('content');
+    const crumb = document.getElementById('crumb');
+    let DATA = { albums: [] };
+    let current = { album: null, index: 0 };
+
+    async function load() {
+      try {
+        const res = await fetch('manifest.json?_=' + Date.now());
+        if (!res.ok) throw new Error('no manifest');
+        DATA = await res.json();
+      } catch (e) {
+        DATA = { albums: [] };
+      }
+      route();
+    }
+
+    function albumBySlug(slug) {
+      return DATA.albums.find(a => a.slug === slug) || null;
+    }
+
+    function renderEmpty() {
+      crumb.textContent = '';
+      content.innerHTML = `
+        <div class="empty">
+          <p>Nessun album ancora. Aggiungi le foto nel repository dentro <code>photos/&lt;nome-album&gt;/</code> e verranno pubblicate automaticamente.</p>
+          <pre>photos/
+  vacanze-2024/
+    IMG_001.jpg
+    IMG_002.jpg
+  montagna/
+    IMG_010.jpg</pre>
+        </div>`;
+    }
+
+    function renderAlbums() {
+      crumb.textContent = '';
+      if (!DATA.albums.length) return renderEmpty();
+      const grid = document.createElement('div');
+      grid.className = 'albums';
+      for (const a of DATA.albums) {
+        const el = document.createElement('a');
+        el.className = 'album';
+        el.href = '#/album/' + encodeURIComponent(a.slug);
+        el.innerHTML = `
+          <img class="cover" loading="lazy" src="${a.coverThumb}" alt="${a.title}" />
+          <div class="meta">
+            <div class="name">${a.title}</div>
+            <div class="count">${a.count} foto</div>
+          </div>`;
+        grid.appendChild(el);
+      }
+      content.innerHTML = '';
+      content.appendChild(grid);
+    }
+
+    function renderAlbum(slug) {
+      const album = albumBySlug(slug);
+      if (!album) return renderAlbums();
+      crumb.innerHTML = `<a href="#/" style="color:var(--accent);text-decoration:none;">Album</a> &nbsp;/&nbsp; ${album.title}`;
+      const grid = document.createElement('div');
+      grid.className = 'photos';
+      album.images.forEach((img, i) => {
+        const im = document.createElement('img');
+        im.loading = 'lazy';
+        im.src = img.thumb;
+        im.alt = album.title + ' ' + (i + 1);
+        im.addEventListener('click', () => openLightbox(album, i));
+        grid.appendChild(im);
+      });
+      content.innerHTML = '';
+      content.appendChild(grid);
+    }
+
+    /* Lightbox */
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    function openLightbox(album, index) {
+      current = { album, index };
+      showLightbox();
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+    function showLightbox() {
+      const img = current.album.images[current.index];
+      lbImg.src = img.full;
+      lbImg.alt = current.album.title + ' ' + (current.index + 1);
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+    }
+    function step(delta) {
+      if (!current.album) return;
+      const n = current.album.images.length;
+      current.index = (current.index + delta + n) % n;
+      showLightbox();
+    }
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+    document.getElementById('lbNext').addEventListener('click', () => step(1));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'ArrowRight') step(1);
+    });
+
+    function route() {
+      closeLightbox();
+      const h = location.hash;
+      const m = h.match(/^#\/album\/(.+)$/);
+      if (m) renderAlbum(decodeURIComponent(m[1]));
+      else renderAlbums();
+    }
+
+    window.addEventListener('hashchange', route);
+    load();
+  </script>
+</body>
+</html>
