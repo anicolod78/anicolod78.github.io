@@ -2,7 +2,7 @@
 // Each sub-folder of photos/ becomes an album. Run by the build-gallery workflow.
 // No npm dependencies: shells out to ImageMagick (convert/identify), preinstalled on runners.
 
-import { readdirSync, statSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { readdirSync, statSync, mkdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, extname } from 'node:path';
 
@@ -28,6 +28,8 @@ function listImages(p) {
     .sort();
 }
 
+// Rebuild thumbs from scratch so renamed/removed photos don't leave orphans.
+rmSync(THUMBS, { recursive: true, force: true });
 mkdirSync(THUMBS, { recursive: true });
 
 const albums = [];
