@@ -1,3 +1,157 @@
 {
-  "albums": []
+  "albums": [
+    {
+      "slug": "Trautmannsdorf",
+      "title": "Trautmannsdorf",
+      "count": 24,
+      "cover": "/photos/Trautmannsdorf/IMG_20260816_222755_00.jpg",
+      "coverThumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_00.jpg",
+      "images": [
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_00.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_00.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_01.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_01.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_02.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_02.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_03.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_03.jpg",
+          "w": 400,
+          "h": 600
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_04.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_04.jpg",
+          "w": 400,
+          "h": 600
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_05.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_05.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_06.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_06.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_07.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_07.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_08.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_08.jpg",
+          "w": 400,
+          "h": 600
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_09.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_09.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_10.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_10.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_11.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_11.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_12.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_12.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_13.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_13.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_14.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_14.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_15.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_15.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_16.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_16.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_17.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_17.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_18.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_18.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_19.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_19.jpg",
+          "w": 400,
+          "h": 600
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_20.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_20.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_21.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_21.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_22.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_22.jpg",
+          "w": 600,
+          "h": 400
+        },
+        {
+          "full": "/photos/Trautmannsdorf/IMG_20260816_222755_23.jpg",
+          "thumb": "/gallery/thumbs/Trautmannsdorf/IMG_20260816_222755_23.jpg",
+          "w": 400,
+          "h": 600
+        }
+      ]
+    }
+  ]
 }
