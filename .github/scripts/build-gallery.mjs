@@ -23,7 +23,9 @@ function listDirs(p) {
   return readdirSync(p).filter((n) => !n.startsWith('.') && statSync(join(p, n)).isDirectory());
 }
 function listImages(p) {
-  return readdirSync(p).filter((n) => IMG_EXT.has(extname(n).toLowerCase())).sort();
+  return readdirSync(p)
+    .filter((n) => !n.startsWith('.') && IMG_EXT.has(extname(n).toLowerCase())) // skip hidden/.trashed files
+    .sort();
 }
 
 mkdirSync(THUMBS, { recursive: true });
