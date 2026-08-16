@@ -1,37 +1,3 @@
 {
-  "albums": [
-    {
-      "slug": "prova",
-      "title": "Prova",
-      "count": 4,
-      "cover": "/photos/prova/IMG_20260429_205604549.jpg",
-      "coverThumb": "/gallery/thumbs/prova/IMG_20260429_205604549.jpg",
-      "images": [
-        {
-          "full": "/photos/prova/IMG_20260429_205604549.jpg",
-          "thumb": "/gallery/thumbs/prova/IMG_20260429_205604549.jpg",
-          "w": 450,
-          "h": 600
-        },
-        {
-          "full": "/photos/prova/IMG_20260501_145557108.jpg",
-          "thumb": "/gallery/thumbs/prova/IMG_20260501_145557108.jpg",
-          "w": 600,
-          "h": 450
-        },
-        {
-          "full": "/photos/prova/IMG_20260816_192007_00.jpg",
-          "thumb": "/gallery/thumbs/prova/IMG_20260816_192007_00.jpg",
-          "w": 600,
-          "h": 450
-        },
-        {
-          "full": "/photos/prova/IMG_20260816_192007_01.jpg",
-          "thumb": "/gallery/thumbs/prova/IMG_20260816_192007_01.jpg",
-          "w": 600,
-          "h": 450
-        }
-      ]
-    }
-  ]
+  "albums": []
 }
